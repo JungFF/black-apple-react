@@ -4,7 +4,7 @@ import Product from "@components/Product.jsx";
 import "./main.css";
 import { product } from "./assets/data/index.js";
 
-function App() {
+export function App() {
   return (
     <>
       <h1>Hello, React!</h1>
@@ -17,9 +17,11 @@ function App() {
   );
 }
 const root = document.getElementById("root");
-const rootElement = ReactDOM.createRoot(root);
-rootElement.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+if (root) {
+  const rootElement = ReactDOM.createRoot(root);
+  rootElement.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+  );
+}
