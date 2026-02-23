@@ -1,16 +1,75 @@
-# React + Vite
+# Black Apple React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern Apple Store clone built with React 19 and Vite. Features product showcases with smooth animations, responsive design, and a component-driven architecture.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19** — UI framework
+- **Vite 7** — Build tool & dev server
+- **Styled Components** — CSS-in-JS styling
+- **Framer Motion** — Animation library
+- **ESLint + Prettier** — Code quality & formatting
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js >= 18
+- npm or yarn
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Installation
+
+```bash
+git clone https://github.com/your-username/black-apple-react.git
+cd black-apple-react
+npm install
+```
+
+### Development
+
+```bash
+npm run dev
+```
+
+Opens at [http://localhost:3000](http://localhost:3000).
+
+### Production Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## Project Structure
+
+```
+src/
+├── assets/
+│   ├── data/         # Product data & route definitions
+│   └── images/       # Static images
+├── components/       # Reusable UI components
+├── main.jsx          # App entry point
+└── main.css          # Global styles
+```
+
+## Path Aliases
+
+| Alias          | Path               |
+| -------------- | ------------------ |
+| `@`            | `src/`             |
+| `@components`  | `src/components/`  |
+| `~img`         | `src/assets/images/`|
+| `#types`       | `src/types/`       |
+
+## Scripts
+
+| Command           | Description                  |
+| ----------------- | ---------------------------- |
+| `npm run dev`     | Start development server     |
+| `npm run build`   | Build for production         |
+| `npm run preview` | Preview production build     |
+| `npm run lint`    | Run ESLint                   |
+
+## License
+
+MIT
