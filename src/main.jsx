@@ -7,7 +7,7 @@ import { product } from "./assets/data/index.js";
 export function App() {
   return (
     <>
-      <h1>Hello, React!!!</h1>
+      <h1>Hello, React!!</h1>
       <Product
         image={product.image}
         title={product.title}
