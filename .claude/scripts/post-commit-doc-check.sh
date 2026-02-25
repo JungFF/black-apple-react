@@ -74,4 +74,9 @@ ${diff_stat}
 CMSG
 
 # ── 7. Return JSON to Claude ───────────────────────────────────────────────
-jq -n --arg msg "$context_message" '{"message": $msg}'
+jq -n --arg msg "$context_message" '{
+  "hookSpecificOutput": {
+    "hookEventName": "PostToolUse",
+    "additionalContext": $msg
+  }
+}'
