@@ -66,6 +66,3 @@ Flat config (v9) in `eslint.config.js`. Custom rule: `no-unused-vars` allows SCR
 
 GitHub Actions automatically runs lint and tests on every PR targeting the `main` branch. The workflow is defined in `.github/workflows/ci.yml`. Branch protection rules require the `Lint & Test` check to pass before merging.
 
-## Keeping Docs Up to Date
-
-After making significant changes (new features, architectural changes, new dependencies, new conventions, or config changes), review and update this file and `README.md` to reflect those changes before committing. Minor fixes and small tweaks do not require doc updates.
