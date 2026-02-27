@@ -8,11 +8,14 @@
 set -euo pipefail
 
 # ── 1. Read and parse the hook payload ──────────────────────────────────────
-payload="$(cat)"
+# The JSON payload may contain literal newlines inside string values (e.g.
+# tool_output with multi-line git output), which breaks jq. Collapse to a
+# single line first — safe because we only need tool_name and tool_input.command,
+# neither of which contain newlines.
+payload="$(cat | tr '\n' ' ')"
 
 tool_name="$(echo "$payload" | jq -r '.tool_name // empty')"
 tool_input="$(echo "$payload" | jq -r '.tool_input.command // empty')"
-tool_output="$(echo "$payload" | jq -r '.tool_output // empty')"
 
 # ── 2. Fast exit for anything that isn't a Bash tool call ───────────────────
 [[ "$tool_name" == "Bash" ]] || exit 0
@@ -24,8 +27,12 @@ if ! echo "$tool_input" | grep -qE '(^|[;&|]\s*)git\s+commit\b'; then
 fi
 
 # ── 4. Verify the commit actually succeeded ─────────────────────────────────
-# Look for common failure signatures in the output.
-if echo "$tool_output" | grep -qiE '(^fatal:|^error:|nothing to commit|no changes added)'; then
+# Instead of parsing tool_output (which may contain unescaped newlines that
+# break jq), check git state directly: compare HEAD before/after timestamp.
+# If HEAD was updated within the last 5 seconds, the commit succeeded.
+head_epoch="$(git log -1 --format='%ct' 2>/dev/null || echo '0')"
+now_epoch="$(date +%s)"
+if (( now_epoch - head_epoch > 5 )); then
   exit 0
 fi
 
@@ -67,4 +74,9 @@ ${diff_stat}
 CMSG
 
 # ── 7. Return JSON to Claude ───────────────────────────────────────────────
-jq -n --arg msg "$context_message" '{"message": $msg}'
+jq -n --arg msg "$context_message" '{
+  "hookSpecificOutput": {
+    "hookEventName": "PostToolUse",
+    "additionalContext": $msg
+  }
+}'

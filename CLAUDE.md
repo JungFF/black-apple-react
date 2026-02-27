@@ -31,7 +31,7 @@ Early-stage Apple Store clone (Chinese locale) built with React 19 + Vite 7. Pla
 
 **Entry point:** `src/main.jsx` exports `App` as a named export (required for testing) and conditionally mounts to `#root` with `if (root)` guard so tests can import `App` without triggering `createRoot`.
 
-**Components** (`src/components/`): Function components using plain `props` object access (not destructured). Currently only `Product.jsx`.
+**Components** (`src/components/`): Function components using destructured props. `Product.jsx` renders a single product card; `ProductList.jsx` renders a grid of Product cards.
 
 **Data layer** (`src/assets/data/`): All data is static JS objects — no API calls or state management. `products.js` defines 12 product objects; `index.js` composes them into lists (`NEW_ARRIVALS_LIST`, `OFFER_LIST`, `SUGGESTED_PROUDCT`); `path.js` defines route/navigation structure as plain arrays.
 
