@@ -1,25 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Product from "@components/Product.jsx";
 import "./main.css";
-import { product } from "./assets/data/index.js";
+import { NEW_ARRIVALS_LIST } from "./assets/data/index.js";
+import { ProductList } from "@components/ProductList.jsx";
 
 export function App() {
-  return (
-    <>
-      <h1>Hello, React!!</h1>
-      <Product
-        image={product.image}
-        title={product.title}
-        detail={product.detail}
-      />
-    </>
-  );
+  return <ProductList data={NEW_ARRIVALS_LIST} />;
 }
-const root = document.getElementById("root");
-if (root) {
-  const rootElement = ReactDOM.createRoot(root);
-  rootElement.render(
+
+const container = document.getElementById("root");
+if (container) {
+  if (!window.__reactRoot) {
+    window.__reactRoot = ReactDOM.createRoot(container);
+  }
+  window.__reactRoot.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>,
